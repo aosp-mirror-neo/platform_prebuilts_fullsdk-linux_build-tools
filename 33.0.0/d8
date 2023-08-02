@@ -36,7 +36,6 @@ cd "${oldwd}"
 
 jarfile=d8.jar
 libdir="$progdir"
-mainClass="com.android.tools.r8.D8"
 
 if [ ! -r "$libdir/$jarfile" ]; then
     # set d8.jar location for the SDK case
@@ -47,7 +46,6 @@ fi
 if [ ! -r "$libdir/$jarfile" ]; then
     # set d8.jar location for the Android tree case
     libdir=`dirname "$progdir"`/framework
-    mainClass="com.android.tools.r8wrappers.D8Wrapper"
 fi
 
 if [ ! -r "$libdir/$jarfile" ]; then
@@ -88,4 +86,4 @@ else
     jarpath="$libdir/$jarfile"
 fi
 
-exec java "${javaOpts[@]}" -cp "$jarpath" "$mainClass" "$@"
+exec java "${javaOpts[@]}" -cp "$jarpath" com.android.tools.r8.D8 "$@"
